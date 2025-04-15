@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Equation Builder Game</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fffbe6;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    header {
+      background-color: #f9c74f;
+      color: #fff;
+      padding: 20px 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    main {
+      padding: 30px 20px;
+    }
+
+    .game-container {
+      background-color: #ffffff;
+      border-radius: 12px;
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .target,
+    .numbers {
+      font-size: 1.3em;
+      margin: 15px 0;
+    }
+
+    .input-section {
+      margin-top: 20px;
+    }
+
+    input[type="text"] {
+      font-size: 1em;
+      padding: 8px;
+      width: 80%;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      text-align: center;
+      text-decoration: underline;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1em;
+      background-color: #f9844a;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin: 5px;
+    }
+
+    button:hover {
+      background-color: #f3722c;
+    }
+
+    .answer-button {
+      background-color: #90be6d;
+    }
+
+    .answer-button:hover {
+      background-color: #73a942;
+    }
+
+    .refresh-button {
+      background-color: #4d90fe;
+    }
+
+    .refresh-button:hover {
+      background-color: #1d5bb0;
+    }
+
+    .feedback {
+      font-size: 1.2em;
+      margin-top: 15px;
+      font-weight: bold;
+      min-height: 1.5em;
+    }
+
+    footer {
+      background-color: #f9c74f;
+      color: #fff;
+      padding: 10px 0;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    nav{
+        background-color: rgb(161, 114, 83);
+        padding: 10px;
+        overflow: hidden;
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    }
+    nav a{
+        color:rgb(255, 255, 255);
+        text-decoration: none;
+        padding:15px;
+        font-weight: bold;
+    }
+
+    nav a:hover{
+        background-color: rgb(231, 183, 141);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🎯 Equation Builder Game 🎯</h1>
+  </header>
+  <nav>
+    <a href="index.html">Resume Page</a>
+    <a href="webapp.html">Web App Page</a>
+   </nav>
+  <main>
+    <div class="game-container">
+      <div class="target">Target: <span id="target-number">24</span></div>
+      <div class="numbers">Numbers: <span id="random-numbers">4, 7, 2, 6</span></div>
+      
+      <div class="input-section">
+        <input type="text" id="equation-input" placeholder="Use all numbers & + - * / once" />
+        <br/>
+        <button onclick="checkAnswer()">Submit</button>
+        <button class="answer-button" onclick="showAnswer()">Show Answer</button>
+        <button class="refresh-button" onclick="refreshGame()">Refresh</button>
+      </div>
+
+      <div class="feedback" id="player-equation"></div>
+      <div class="feedback" id="feedback"></div>
+      <div class="feedback" id="answerReveal"></div>
+    </div>
+  </main>
+  <footer>
+    &copy; 2025 MathFun Inc.
+  </footer>
+
+  <script>
+    let target = 24; // Default target
+    let randomNumbers = [4, 7, 2, 6]; // Default numbers
+
+    function generateRandomNumbers() {
+      // Randomize 4 numbers between 1 and 9
+      randomNumbers = Array.from({ length: 4 }, () => Math.floor(Math.random() * 9) + 1);
+      document.getElementById('random-numbers').textContent = randomNumbers.join(', ');
+      target = randomNumbers.reduce((acc, num) => acc + num, 0); // Sum of random numbers as the target
+      document.getElementById('target-number').textContent = target;
+    }
+
+    function checkAnswer() {
+      const input = document.getElementById('equation-input').value;
+      const playerEquation = document.getElementById('player-equation');
+      const feedback = document.getElementById('feedback');
+      const answerReveal = document.getElementById('answerReveal');
+
+      playerEquation.textContent = `🧮 Your answer: ${input}`;
+
+      try {
+        const result = eval(input);
+        if (result === target) {
+          feedback.textContent = `✅ Correct! (${result})`;
+          answerReveal.textContent = "";
+        } else {
+          feedback.textContent = `❌ Not quite. You got ${result}`;
+        }
+      } catch {
+        feedback.textContent = "⚠️ Invalid Equation";
+      }
+    }
+
+    function showAnswer() {
+      const answerReveal = document.getElementById('answerReveal');
+      answerReveal.textContent = `💡 One possible correct answer: ${randomNumbers[0]} * ${randomNumbers[1]} + ${randomNumbers[2]} - ${randomNumbers[3]}`;
+    }
+
+    function refreshGame() {
+      generateRandomNumbers();
+      document.getElementById('equation-input').value = ''; // Clear previous input
+      document.getElementById('player-equation').textContent = ''; // Clear previous player answer
+      document.getElementById('feedback').textContent = ''; // Clear feedback
+      document.getElementById('answerReveal').textContent = ''; // Clear revealed answer
+    }
+
+    // Initialize game on load
+    window.onload = refreshGame;
+  </script>
+</body>
+</html>

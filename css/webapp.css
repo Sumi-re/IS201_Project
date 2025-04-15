@@ -1,0 +1,98 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fffbe6;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+  
+  header {
+    background-color: #f9c74f;
+    color: #fff;
+    padding: 20px 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  main {
+    padding: 30px 20px;
+  }
+  
+  .game-container {
+    background-color: #ffffff;
+    border-radius: 12px;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .target,
+  .numbers {
+    font-size: 1.3em;
+    margin: 15px 0;
+  }
+  
+  .input-section {
+    margin-top: 20px;
+  }
+  
+  input[type="text"] {
+    font-size: 1em;
+    padding: 8px;
+    width: 80%;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    text-align: center;
+    text-decoration: underline;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #f9844a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 5px;
+  }
+  
+  button:hover {
+    background-color: #f3722c;
+  }
+  
+  .answer-button {
+    background-color: #90be6d;
+  }
+  
+  .answer-button:hover {
+    background-color: #73a942;
+  }
+  
+  .refresh-button {
+    background-color: #4d90fe;
+  }
+  
+  .refresh-button:hover {
+    background-color: #1d5bb0;
+  }
+  
+  .feedback {
+    font-size: 1.2em;
+    margin-top: 15px;
+    font-weight: bold;
+    min-height: 1.5em;
+  }
+  
+  footer {
+    background-color: #f9c74f;
+    color: #fff;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
